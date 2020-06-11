@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2020-06-11 18:11:24">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description>Contains custom button to open the records in a new window</description>
+<inserted/>
+<name>Updateset Buttons-2.0</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>1d2b21d21bd11cd08ed631d7dc4bcb54</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-06-11 18:11:24</sys_created_on>
+<sys_id>cf2d29161bd11cd08ed631d7dc4bcb34</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-06-11 18:11:24</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_action_ee71496adb4d6740d8ccd421cf96199e</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_ui_action"&gt;&lt;sys_ui_action action="INSERT_OR_UPDATE"&gt;&lt;action_name&gt;open_records_list&lt;/action_name&gt;&lt;active&gt;true&lt;/active&gt;&lt;client&gt;true&lt;/client&gt;&lt;client_script_v2&gt;&lt;![CDATA[function onClick(g_form) {
+
+}]]&gt;&lt;/client_script_v2&gt;&lt;comments&gt;opens the selected records in new window.&lt;/comments&gt;&lt;condition&gt;gs.hasRole('admin')&lt;/condition&gt;&lt;form_action&gt;false&lt;/form_action&gt;&lt;form_button&gt;false&lt;/form_button&gt;&lt;form_button_v2&gt;false&lt;/form_button_v2&gt;&lt;form_context_menu&gt;false&lt;/form_context_menu&gt;&lt;form_link&gt;false&lt;/form_link&gt;&lt;form_menu_button_v2&gt;false&lt;/form_menu_button_v2&gt;&lt;form_style/&gt;&lt;hint&gt;Opens the selected records in new window&lt;/hint&gt;&lt;isolate_script&gt;true&lt;/isolate_script&gt;&lt;list_action&gt;true&lt;/list_action&gt;&lt;list_banner_button&gt;false&lt;/list_banner_button&gt;&lt;list_button&gt;false&lt;/list_button&gt;&lt;list_choice&gt;true&lt;/list_choice&gt;&lt;list_context_menu&gt;false&lt;/list_context_menu&gt;&lt;list_link&gt;false&lt;/list_link&gt;&lt;list_save_with_form_button&gt;false&lt;/list_save_with_form_button&gt;&lt;list_style/&gt;&lt;name&gt;Open In New Window&lt;/name&gt;&lt;onclick&gt;openRecords();&lt;/onclick&gt;&lt;order&gt;-1&lt;/order&gt;&lt;script&gt;&lt;![CDATA[function openRecords()
+{
+	try
+	{
+		var tableName = g_list.getTableName();
+		var ids = g_list.getChecked();
+	
+		if(tableName != 'sys_update_xml'){
+			var idArray = ids.split(',');
+			for(var i = 0; i &lt; idArray.length; i++)
+				{
+				g_navigation.openPopup(tableName+'.do?sys_id='+idArray[i]);
+			}
+		}
+		else{
+			var checkUpdate = new GlideRecord('sys_update_xml');
+			checkUpdate.addQuery('sys_id','IN',ids);
+			checkUpdate.query();
+			while(checkUpdate.next())
+				{
+				var file = new GlideRecord("sys_metadata");
+				file.addQuery("sys_update_name", checkUpdate.name.toString());
+				file.query();
+				if(!file.next())
+					{
+					alert("No record exists for this update");
+				}
+				else
+					{
+					g_navigation.openPopup(file.sys_class_name.toString()+'.do?sys_id='+file.sys_id.toString());
+				}
+			}
+		}
+		
+	}
+	catch(err)
+	{
+		jslog(err);
+	}
+}]]&gt;&lt;/script&gt;&lt;show_insert&gt;false&lt;/show_insert&gt;&lt;show_multiple_update&gt;false&lt;/show_multiple_update&gt;&lt;show_query&gt;false&lt;/show_query&gt;&lt;show_update&gt;true&lt;/show_update&gt;&lt;sys_class_name&gt;sys_ui_action&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2018-10-12 10:49:49&lt;/sys_created_on&gt;&lt;sys_customer_update&gt;false&lt;/sys_customer_update&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;ee71496adb4d6740d8ccd421cf96199e&lt;/sys_id&gt;&lt;sys_mod_count&gt;10&lt;/sys_mod_count&gt;&lt;sys_name&gt;Open In New Window&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_replace_on_upgrade&gt;false&lt;/sys_replace_on_upgrade&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_action_ee71496adb4d6740d8ccd421cf96199e&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-06-11 18:04:55&lt;/sys_updated_on&gt;&lt;table&gt;global&lt;/table&gt;&lt;ui11_compatible&gt;false&lt;/ui11_compatible&gt;&lt;ui16_compatible&gt;false&lt;/ui16_compatible&gt;&lt;/sys_ui_action&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1005239900</payload_hash>
+<remote_update_set display_value="Updateset Buttons-2.0">cf2d29161bd11cd08ed631d7dc4bcb34</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-06-11 18:11:24</sys_created_on>
+<sys_id>cb2de9d61bd11cd08ed631d7dc4bcb1f</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>172a48e686f0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-06-11 18:11:24</sys_updated_on>
+<table>global</table>
+<target_name>Open In New Window</target_name>
+<type>UI Action</type>
+<update_domain>global</update_domain>
+<update_guid>c0bb255679d11cd0ada7eb2ae418dd51</update_guid>
+<update_guid_history>c0bb255679d11cd0ada7eb2ae418dd51:-1005239900,c4c4b3f1e09d58d04f1e24177cf70ecf:989638060,6c8647fd04d558d0e1d227fff33dbc1c:-1417346116,094b09e2428d6740a97fc3416933001b:761283567,7de6c9ee7c4d674004a44d933157b76d:-1361945407,21d649eecf4d67408abe84df61ffdaee:-1665548880,2eb5012e934d6740d32f3d6ddc8f5125:-941770272,615501ae8c4d674093567a76726107aa:1240874156,69f4416e384d674096e3702b19d23c91:-924446120,4f44012e2b4d6740082637468067351e:-1359582010,ea71c1aabf4d6740263447a5f2e49b19:2123193374</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
