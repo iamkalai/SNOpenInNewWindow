@@ -1,4 +1,4 @@
-# SN Export Updatesets With Name
+# SN Open In New Window
 
 ## Description
 
